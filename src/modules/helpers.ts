@@ -69,6 +69,7 @@ class Hand {
 
     //=================
     this.renewCardsAmount()
+    this.setHTMLCardsBlocked()
   }
 
   private renewCardsAmount() {
@@ -77,6 +78,16 @@ class Hand {
     ) as HTMLSpanElement
     if (!amountElem) return
     amountElem.innerText = this.hand.size.toString()
+  }
+
+  private setHTMLCardsBlocked() {
+    const cards = document.querySelectorAll(".hand-card")
+    for (const card of cards) {
+      const name = card.getAttribute("data-name")
+      if (!name) continue
+      if (this.blocked.has(name)) card.classList.add("blocked")
+      else card.classList.remove("blocked")
+    }
   }
 }
 
