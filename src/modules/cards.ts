@@ -273,9 +273,21 @@ const protectActions: Actions = {
     ]) {
       protectedSuits.add(suit)
     }
+    return this.power
   },
 }
-const blockActions: Actions = {}
+const blockActions: Actions = {
+  basilisk(hand, blocked, protectedSuits) {
+    const blankedSuits = ["Army", "Leader", "Beast"].filter(
+      (e) => !protectedSuits.has(e)
+    )
+    for (const [name, card] of hand) {
+      if (blankedSuits.includes(card.suit) && name !== "basilisk")
+        blocked.add(name)
+    }
+    return this.power
+  },
+}
 const unblockActions: Actions = {}
 const bonusActions: Actions = {
   rangers(hand, blocked) {
@@ -309,14 +321,11 @@ const bonusActions: Actions = {
   bookOfChanges() {
     return this.power
   },
-  protectionRune() {
-    return this.power
-  },
   shieldOfKeth(hand, blocked) {
     let sum = this.power
     for (const [name, card] of hand) {
       if (card.suit === "Leader" && !blocked.has(name)) {
-        if (hand.has("swordOfKeth")) sum += 40
+        if (hand.has("swordOfKeth") && !blocked.has("swordOfKeth")) sum += 40
         else sum += 15
         break
       }
@@ -364,6 +373,31 @@ const bonusActions: Actions = {
     }
     return sum
   },
+  warhorse(hand, blocked) {
+    let sum = this.power
+    for (const [name, card] of hand) {
+      if (
+        (card.suit === "Leader" || card.suit === "Wizard") &&
+        !blocked.has(name)
+      ) {
+        sum += 15
+        break
+      }
+    }
+    return sum
+  },
+  unicorn(hand, blocked) {
+    let sum = this.power
+    if (hand.has("princess") && !blocked.has("princess")) return sum + 30
+    for (const name of ["empress", "queen", "elementalEnchantress"]) {
+      if (hand.has(name) && !blocked.has(name)) return sum + 15
+    }
+    return sum
+  },
+  hydra(hand, blocked) {
+    let sum = this.power
+    return hand.has("swamp") && !blocked.has("swamp") ? sum + 28 : sum
+  },
 }
 const penaltyActions: Actions = {
   dwarvishInfantry(hand, blocked, protectedSuits) {
@@ -393,6 +427,17 @@ const penaltyActions: Actions = {
     for (const [name, card] of hand) {
       if (card.suit === "Leader" && !blocked.has(name)) {
         sum -= 8
+        break
+      }
+    }
+    return sum
+  },
+  dragon(hand, blocked, protectedSuits) {
+    let sum = this.power
+    if (protectedSuits.has("Wizard")) return sum
+    for (const [name, card] of hand) {
+      if (card.suit === "Wizard" && !blocked.has(name)) {
+        sum -= 40
         break
       }
     }
