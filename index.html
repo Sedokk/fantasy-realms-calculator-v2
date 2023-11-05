@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fantasy Realms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <section class="cards">
+        <div class="suit">
+          <h2 class="suit__name">Army</h2>
+          <div class="suit__cards">
+            <button class="suit-card" data-name="rangers">
+              <span class="suit-card__text">Rangers</span
+              ><span class="suit-card__power">5</span>
+            </button>
+            <button class="suit-card" data-name="elvenArchers">
+              <span class="suit-card__text">Elven Archers</span
+              ><span class="suit-card__power">10</span>
+            </button>
+            <button class="suit-card" data-name="dwarvishInfantry">
+              <span class="suit-card__text">Dwarvish Infantry</span
+              ><span class="suit-card__power">15</span>
+            </button>
+            <button class="suit-card" data-name="lightCavalry">
+              <span class="suit-card__text">Light Cavalry</span
+              ><span class="suit-card__power">17</span>
+            </button>
+            <button class="suit-card" data-name="celestialKnights">
+              <span class="suit-card__text">Celestial Knights</span
+              ><span class="suit-card__power">20</span>
+            </button>
+          </div>
+        </div>
+        <div class="suit">
+          <h2 class="suit__name">Artifact</h2>
+          <div class="suit__cards">
+            <button class="suit-card" data-name="protectionRune">
+              <span class="suit-card__text">Protection Rune</span
+              ><span class="suit-card__power">1</span>
+            </button>
+            <button class="suit-card" data-name="worldTree">
+              <span class="suit-card__text">World Tree</span
+              ><span class="suit-card__power">2</span>
+            </button>
+            <button class="suit-card" data-name="bookOfChanges">
+              <span class="suit-card__text">Book of Changes</span
+              ><span class="suit-card__power">3</span>
+            </button>
+            <button class="suit-card" data-name="shieldOfKeth">
+              <span class="suit-card__text">Shield of Keth</span
+              ><span class="suit-card__power">4</span>
+            </button>
+            <button class="suit-card" data-name="gemOfOrder">
+              <span class="suit-card__text">Gem of Order</span
+              ><span class="suit-card__power">5</span>
+            </button>
+          </div>
+        </div>
+        <div class="suit">
+          <h2 class="suit__name">Beast</h2>
+          <div class="suit__cards">
+            <button class="suit-card" data-name="warhorse">
+              <span class="suit-card__text">Warhorse</span
+              ><span class="suit-card__power">6</span>
+            </button>
+            <button class="suit-card" data-name="unicorn">
+              <span class="suit-card__text">Unicorn</span
+              ><span class="suit-card__power">9</span>
+            </button>
+            <button class="suit-card" data-name="hydra">
+              <span class="suit-card__text">Hydra</span
+              ><span class="suit-card__power">12</span>
+            </button>
+            <button class="suit-card" data-name="dragon">
+              <span class="suit-card__text">Dragon</span
+              ><span class="suit-card__power">30</span>
+            </button>
+            <button class="suit-card" data-name="basilisk">
+              <span class="suit-card__text">Basilisk</span
+              ><span class="suit-card__power">35</span>
+            </button>
+          </div>
+        </div>
+        <div class="suit">
+          <h2 class="suit__name">Flame</h2>
+          <div class="suit__cards">
+            <button class="suit-card" data-name="candle">
+              <span class="suit-card__text">Candle</span
+              ><span class="suit-card__power">2</span>
+            </button>
+            <button class="suit-card" data-name="fireElemental">
+              <span class="suit-card__text">Fire Elemental</span
+              ><span class="suit-card__power">4</span>
+            </button>
+            <button class="suit-card" data-name="forge">
+              <span class="suit-card__text">Forge</span
+              ><span class="suit-card__power">9</span>
+            </button>
+            <button class="suit-card" data-name="lightning">
+              <span class="suit-card__text">Lightning</span
+              ><span class="suit-card__power">11</span>
+            </button>
+            <button class="suit-card" data-name="wildfire">
+              <span class="suit-card__text">Wildfire</span
+              ><span class="suit-card__power">40</span>
+            </button>
+          </div>
+        </div>
+        <div class="suit">
+          <h2 class="suit__name">Flood</h2>
+          <div class="suit__cards">
+            <button class="suit-card" data-name="fountainOfLife">
+              <span class="suit-card__text">Fountain of Life</span
+              ><span class="suit-card__power">1</span>
+            </button>
+            <button class="suit-card" data-name="waterElemental">
+              <span class="suit-card__text">Water Elemental</span
+              ><span class="suit-card__power">4</span>
+            </button>
+            <button class="suit-card" data-name="island">
+              <span class="suit-card__text">Island</span
+              ><span class="suit-card__power">14</span>
+            </button>
+            <button class="suit-card" data-name="swamp">
+              <span class="suit-card__text">Swamp</span
+              ><span class="suit-card__power">18</span>
+            </button>
+            <button class="suit-card" data-name="greatFlood">
+              <span class="suit-card__text">Great Flood</span
+              ><span class="suit-card__power">32</span>
+            </button>
+          </div>
+        </div>
+        <div class="suit">
+          <h2 class="suit__name">Land</h2>
+          <div class="suit__cards">
+            <button class="suit-card" data-name="earthElemental">
+              <span class="suit-card__text">Earth Elemental</span
+              ><span class="suit-card__power">4</span>
+            </button>
+            <button class="suit-card" data-name="undergroundCaverns">
+              <span class="suit-card__text">Underground Caverns</span
+              ><span class="suit-card__power">6</span>
+            </button>
+            <button class="suit-card" data-name="forest">
+              <span class="suit-card__text">Forest</span
+              ><span class="suit-card__power">7</span>
+            </button>
+            <button class="suit-card" data-name="bellTower">
+              <span class="suit-card__text">Bell Tower</span
+              ><span class="suit-card__power">8</span>
+            </button>
+            <button class="suit-card" data-name="mountain">
+              <span class="suit-card__text">Mountain</span
+              ><span class="suit-card__power">9</span>
+            </button>
+          </div>
+        </div>
+        <div class="suit">
+          <h2 class="suit__name">Leader</h2>
+          <div class="suit__cards">
+            <button class="suit-card" data-name="princess">
+              <span class="suit-card__text">Princess</span
+              ><span class="suit-card__power">2</span>
+            </button>
+            <button class="suit-card" data-name="warlord">
+              <span class="suit-card__text">Warlord</span
+              ><span class="suit-card__power">4</span>
+            </button>
+            <button class="suit-card" data-name="queen">
+              <span class="suit-card__text">Queen</span
+              ><span class="suit-card__power">6</span>
+            </button>
+            <button class="suit-card" data-name="king">
+              <span class="suit-card__text">King</span
+              ><span class="suit-card__power">8</span>
+            </button>
+            <button class="suit-card" data-name="empress">
+              <span class="suit-card__text">Empress</span
+              ><span class="suit-card__power">10</span>
+            </button>
+          </div>
+        </div>
+        <div class="suit">
+          <h2 class="suit__name">Weapon</h2>
+          <div class="suit__cards">
+            <button class="suit-card" data-name="magicWand">
+              <span class="suit-card__text">Magic Wand</span
+              ><span class="suit-card__power">1</span>
+            </button>
+            <button class="suit-card" data-name="elvenLongbow">
+              <span class="suit-card__text">Elven Longbow</span
+              ><span class="suit-card__power">3</span>
+            </button>
+            <button class="suit-card" data-name="swordOfKeth">
+              <span class="suit-card__text">Sword of Keth</span
+              ><span class="suit-card__power">7</span>
+            </button>
+            <button class="suit-card" data-name="warship">
+              <span class="suit-card__text">Warship</span
+              ><span class="suit-card__power">23</span>
+            </button>
+            <button class="suit-card" data-name="warDirigible">
+              <span class="suit-card__text">War Dirigible</span
+              ><span class="suit-card__power">35</span>
+            </button>
+          </div>
+        </div>
+        <div class="suit">
+          <h2 class="suit__name">Weather</h2>
+          <div class="suit__cards">
+            <button class="suit-card" data-name="airElemental">
+              <span class="suit-card__text">Air Elemental</span
+              ><span class="suit-card__power">4</span>
+            </button>
+            <button class="suit-card" data-name="rainshtorm">
+              <span class="suit-card__text">Rainshtorm</span
+              ><span class="suit-card__power">8</span>
+            </button>
+            <button class="suit-card" data-name="whirwind">
+              <span class="suit-card__text">Whirlwind</span
+              ><span class="suit-card__power">13</span>
+            </button>
+            <button class="suit-card" data-name="smoke">
+              <span class="suit-card__text">Smoke</span
+              ><span class="suit-card__power">27</span>
+            </button>
+            <button class="suit-card" data-name="blizzard">
+              <span class="suit-card__text">Blizzard</span
+              ><span class="suit-card__power">30</span>
+            </button>
+          </div>
+        </div>
+        <div class="suit">
+          <h2 class="suit__name">Wizard</h2>
+          <div class="suit__cards">
+            <button class="suit-card" data-name="necromancer">
+              <span class="suit-card__text">Necromancer</span
+              ><span class="suit-card__power">3</span>
+            </button>
+            <button class="suit-card" data-name="elementalEnchantress">
+              <span class="suit-card__text">Elemental Enchantress</span
+              ><span class="suit-card__power">5</span>
+            </button>
+            <button class="suit-card" data-name="collector">
+              <span class="suit-card__text">Collector</span
+              ><span class="suit-card__power">7</span>
+            </button>
+            <button class="suit-card" data-name="beastmaster">
+              <span class="suit-card__text">Beastmaster</span
+              ><span class="suit-card__power">9</span>
+            </button>
+            <button class="suit-card" data-name="warlockLord">
+              <span class="suit-card__text">Warlock Lord</span
+              ><span class="suit-card__power">25</span>
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="results">
+        <div class="results__figures">
+          <h3 class="results__count">0</h3>
+          <h3 class="results__cards-count">
+            <span class="results__has-cards">7</span>/<span
+              class="results__of-cards"
+              >7</span
+            >
+          </h3>
+        </div>
+        <div class="results__hand"></div>
+      </section>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
