@@ -82,7 +82,7 @@ const cards: Cards = {
     suit: "Flame",
   },
   fireElemental: {
-    title: "Fire ELemental",
+    title: "Fire Elemental",
     power: 4,
     suit: "Flame",
   },
@@ -275,6 +275,12 @@ const protectActions: Actions = {
     }
     return this.power
   },
+  undergroundCaverns(_, __, protectedSuits) {
+    protectedSuits.add("Weather")
+  },
+  mountain(_, __, protectedSuits) {
+    protectedSuits.add("Flood")
+  },
 }
 const blockActions: Actions = {
   basilisk(hand, blocked, protectedSuits) {
@@ -283,6 +289,31 @@ const blockActions: Actions = {
     )
     for (const [name, card] of hand) {
       if (blankedSuits.includes(card.suit) && name !== "basilisk")
+        blocked.add(name)
+    }
+    return this.power
+  },
+  wildfire(hand, blocked) {
+    for (const [name, card] of hand) {
+      if (
+        ["greatFlood", "island", "mountain", "unicorn", "dragon"].includes(name)
+      )
+        continue
+      if (
+        ["Flame", "Weather", "Wizard", "Weapon", "Artifact"].includes(card.suit)
+      )
+        continue
+      blocked.add(name)
+    }
+    return this.power
+  },
+  greatFlood(hand, blocked, protectedSuits) {
+    for (const [name, card] of hand) {
+      if (["mountain", "lightning"].includes(name)) continue
+      if (
+        ["Army", "Land", "Flame"].includes(card.suit) &&
+        !protectedSuits.has(card.suit)
+      )
         blocked.add(name)
     }
     return this.power
@@ -398,6 +429,122 @@ const bonusActions: Actions = {
     let sum = this.power
     return hand.has("swamp") && !blocked.has("swamp") ? sum + 28 : sum
   },
+  candle(hand, blocked) {
+    let sum = this.power
+    if (
+      !hand.has(
+        "bookOfChanges" ||
+          blocked.has("bokOfChanges") ||
+          !hand.has("bellTower") ||
+          blocked.has("bellTower")
+      )
+    )
+      return sum
+    for (const [name, card] of hand) {
+      if (card.suit === "Wizard" && !blocked.has(name)) return sum + 100
+    }
+    return sum
+  },
+  fireElemental(hand, blocked) {
+    let sum = this.power
+    for (const [name, card] of hand) {
+      if (
+        card.suit === "Flame" &&
+        name !== "fireElemental" &&
+        !blocked.has(name)
+      )
+        sum += 15
+    }
+    return sum
+  },
+  forge(hand, blocked) {
+    let sum = this.power
+    for (const [name, card] of hand) {
+      if (
+        (card.suit === "Artifact" || card.suit === "Weapon") &&
+        !blocked.has(name)
+      )
+        sum += 9
+    }
+    return sum
+  },
+  lightning(hand, blocked) {
+    let sum = this.power
+    if (hand.has("rainstorm") && !blocked.has("rainstorm")) return sum + 30
+    return sum
+  },
+  fountainOfLife(hand, blocked) {
+    let sum = this.power
+    let max = 0
+    for (const [name, card] of hand) {
+      if (
+        ["Weapon", "Flood", "Flame", "Land", "Weather"].includes(card.suit) &&
+        !blocked.has(name)
+      )
+        max = Math.max(max, card.power)
+    }
+    return sum + max
+  },
+  waterElemental(hand, blocked) {
+    let sum = this.power
+    for (const [name, card] of hand) {
+      if (
+        card.suit === "Flood" &&
+        name !== "waterElemental" &&
+        !blocked.has(name)
+      )
+        sum += 15
+    }
+    return sum
+  },
+  earthElemental(hand, blocked) {
+    let sum = this.power
+    for (const [name, card] of hand) {
+      if (
+        card.suit === "Land" &&
+        name !== "earthElemental" &&
+        !blocked.has(name)
+      )
+        sum += 15
+    }
+    return sum
+  },
+  undergroundCaverns(hand, blocked) {
+    let sum = this.power
+    if (
+      (hand.has("dragon") && !blocked.has("dragon")) ||
+      (hand.has("dwarvishInfantry") && !blocked.has("dwarvishInfantry"))
+    )
+      return sum + 25
+  },
+  forest(hand, blocked) {
+    let sum = this.power
+    if (hand.has("elvenArchers") && !blocked.has("elvenArchers")) sum += 12
+    for (const [name, card] of hand) {
+      if (card.suit === "Beast" && !blocked.has(name)) sum += 12
+    }
+    return sum
+  },
+  bellTower(hand, blocked) {
+    let sum = this.power
+    for (const [name, card] of hand) {
+      if (card.suit === "Wizard" && !blocked.has(name)) {
+        return sum + 15
+      }
+    }
+    return sum
+  },
+  mountain(hand, blocked) {
+    let sum = this.power
+    if (
+      hand.has("smoke") &&
+      !blocked.has("smoke") &&
+      hand.has("wildfire") &&
+      !blocked.has("wilfire")
+    )
+      sum += 50
+    return sum
+  },
 }
 const penaltyActions: Actions = {
   dwarvishInfantry(hand, blocked, protectedSuits) {
@@ -438,6 +585,20 @@ const penaltyActions: Actions = {
     for (const [name, card] of hand) {
       if (card.suit === "Wizard" && !blocked.has(name)) {
         sum -= 40
+        break
+      }
+    }
+    return sum
+  },
+  swamp(hand, blocked, protectedSuits) {
+    let sum = this.power
+    for (const [name, card] of hand) {
+      if (
+        ((card.suit === "Army" && !protectedSuits.has("Army")) ||
+          (card.suit === "Flame" && !protectedSuits.has("Flame"))) &&
+        !blocked.has(name)
+      ) {
+        sum -= 3
         break
       }
     }
